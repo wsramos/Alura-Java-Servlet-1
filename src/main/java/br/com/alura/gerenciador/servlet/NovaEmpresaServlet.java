@@ -1,6 +1,8 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,14 +22,24 @@ public class NovaEmpresaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Cadastrando nova empresa");
 		String nomeEmpresa = request.getParameter("nome");
+		String dataEmpresa = request.getParameter("data");
 		
 		Empresa empresa = new Empresa();
 		empresa.setNome(nomeEmpresa);
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			empresa.setDataAbertura(sdf.parse(dataEmpresa));
+		} catch (ParseException e) {
+			throw new ServletException(e);
+			
+		}
 		
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
 		
 		request.setAttribute("Empresa", empresa.getNome());
+		request.setAttribute("dataAbertura", empresa.getDataAbertura());
 		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
 		rd.forward(request, response);
 	}
