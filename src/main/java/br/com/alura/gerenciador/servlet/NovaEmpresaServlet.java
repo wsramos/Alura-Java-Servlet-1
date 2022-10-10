@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,12 +39,6 @@ public class NovaEmpresaServlet extends HttpServlet {
 
 		response.sendRedirect("listaEmpresas");
 
-		/*
-		 * request.setAttribute("Empresa", empresa.getNome());
-		 * request.setAttribute("dataAbertura", empresa.getDataAbertura());
-		 * RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
-		 * rd.forward(request, response);
-		 */
 
 	}
 
